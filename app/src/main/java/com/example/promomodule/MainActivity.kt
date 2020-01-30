@@ -20,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
 
         model = listOf(
-            Model(R.drawable.ic_005_dracula,"Terror"),
-            Model(R.drawable.ic_010_candy,"Infantiles"),
-            Model(R.drawable.ic_019_brain,"Zombies"),
-            Model(R.drawable.ic_022_ghost,"Fantasmas")
-        )
+            Model(R.drawable.ic_mortarboard,"Educación"),
+            Model(R.drawable.ic_pizza,"Restaurante"),
+            Model(R.drawable.ic_shopping_cart,"Mercado"),
+            Model(R.drawable.ic_stethoscope,"Salud"),
+            Model(R.drawable.ic_ticket,"Cine"))
 
         var adapter = Adapter(model, this)
         viewPager!!.adapter  = adapter
