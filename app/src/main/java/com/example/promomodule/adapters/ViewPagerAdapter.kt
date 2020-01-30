@@ -1,16 +1,16 @@
-package com.example.promomodule
+package com.example.promomodule.adapters
 
 import android.content.Context
-import android.graphics.ColorSpace
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
+import com.example.promomodule.models.CategoriesModel
+import com.example.promomodule.R
 
-class Adapter(var model:List<Model>? = null, var context:Context? = null): PagerAdapter() {
+/*class ViewPagerAdapter(var model:List<CategoriesModel>? = null, var context:Context? = null): PagerAdapter() {
 
     var inflater: LayoutInflater? = null
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -24,7 +24,7 @@ class Adapter(var model:List<Model>? = null, var context:Context? = null): Pager
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         //return super.instantiateItem(container, position)
         inflater = LayoutInflater.from(context)
-        var view= inflater!!.inflate(R.layout.swipe_pager_item_categories, container, false)
+        var view= inflater!!.inflate(R.layout.item_recycler_view_categories, container, false)
 
         var imageCategory:ImageView
         var nameCategory:TextView
@@ -45,4 +45,4 @@ class Adapter(var model:List<Model>? = null, var context:Context? = null): Pager
 
         container.removeView(View(context))
     }
-}
+} */

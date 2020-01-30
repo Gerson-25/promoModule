@@ -1,35 +1,48 @@
 package com.example.promomodule
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.example.promomodule.adapters.CategoriesAdapter
+import com.example.promomodule.adapters.PromotionsAdapter
+import com.example.promomodule.models.CategoriesModel
+import com.example.promomodule.models.PromotionsModel
 
 class MainActivity : AppCompatActivity() {
 
     var viewPager: ViewPager? = null
-    var model: List<Model>? = null
-    var recyclerView:RecyclerView? = null
+    var categoriesModel: List<CategoriesModel>? = null
+    var promotionsModel: List<PromotionsModel>? = null
+    var categoriesRecycler:RecyclerView? = null
+    var promotionsRecycler:RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewPager = findViewById(R.id.viewPager)
+        //viewPager = findViewById(R.id.viewPager)
 
-        model = listOf(
-            Model(R.drawable.ic_mortarboard,"Educación"),
-            Model(R.drawable.ic_pizza,"Restaurante"),
-            Model(R.drawable.ic_shopping_cart,"Mercado"),
-            Model(R.drawable.ic_stethoscope,"Salud"),
-            Model(R.drawable.ic_ticket,"Cine"))
+        categoriesModel = listOf(
+            CategoriesModel(R.drawable.ic_mortarboard, "Educación"),
+            CategoriesModel(R.drawable.ic_pizza, "Restaurante"),
+            CategoriesModel(R.drawable.ic_shopping_cart, "Mercado"),
+            CategoriesModel(R.drawable.ic_stethoscope, "Salud"),
+            CategoriesModel(R.drawable.ic_ticket, "Cine")
+        )
+        promotionsModel = listOf(
+            PromotionsModel(R.drawable.ic_mortarboard, (R.string.text_lorem_ipsum).toString()),
+            PromotionsModel(R.drawable.ic_pizza, (R.string.text_lorem_ipsum).toString()),
+            PromotionsModel(R.drawable.ic_pizza, (R.string.text_lorem_ipsum).toString())
+        )
 
-        var adapter = Adapter(model, this)
+        /*
+        SETTING VIEW PAGER DATA
+        var adapter = ViewPagerAdapter(categoriesModel, this)
         viewPager!!.adapter  = adapter
         viewPager!!.setPadding(0, 0 ,0, 0)
-        recyclerView = findViewById(R.id.recyclerView)
+
 
         viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
@@ -45,12 +58,25 @@ class MainActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
             }
 
-        })
+        })*/
+        //SETTING PROMOTION_RECYCLERVIEW
+        promotionsRecycler = findViewById(R.id.promotions_recycler_view)
 
-        var setAdapter = RecyclerAdapter(this,model)
+        var setPromotionAdapter = PromotionsAdapter(this, promotionsModel)
 
-        recyclerView!!.adapter = setAdapter
+        promotionsRecycler!!.adapter = setPromotionAdapter
 
-        recyclerView!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        promotionsRecycler!!.layoutManager = LinearLayoutManager(this)
+
+
+        //SETTING CATEGORIES_RECYCLERVIEW
+        categoriesRecycler = findViewById(R.id.categories_recycler_view)
+
+        var setCategoryAdapter = CategoriesAdapter(this, categoriesModel)
+
+        categoriesRecycler!!.adapter = setCategoryAdapter
+
+        categoriesRecycler!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
     }
 }
