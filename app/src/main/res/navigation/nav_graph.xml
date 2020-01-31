@@ -17,5 +17,11 @@
         android:id="@+id/categoriesFragment"
         android:name="com.example.promomodule.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <argument
+            android:name="category"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="NO CATEGORY SELETED YET" />
+    </fragment>
 </navigation>

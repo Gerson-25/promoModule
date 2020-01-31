@@ -64,6 +64,10 @@ class PromoHomeFragment : Fragment() {
         var setCategoryAdapter = CategoriesAdapter(context, categoriesModel)
         binding!!.categoriesRecyclerView.adapter = setCategoryAdapter
         binding!!.categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding!!.sendButton.setOnClickListener {
+            var category = "Comida"
+            listener!!.onFragmentInteraction(category)
+        }
 
         var setPromotionAdapter = PromotionsAdapter(context, promotionsModel)
 
@@ -75,7 +79,7 @@ class PromoHomeFragment : Fragment() {
     }
 
     fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        listener?.onFragmentInteraction("Salud")
     }
 
     override fun onAttach(context: Context) {
@@ -93,7 +97,7 @@ class PromoHomeFragment : Fragment() {
     }
 
     interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentInteraction(category:String)
     }
 
     companion object {
