@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.promomodule.R
 import com.example.promomodule.models.CategoriesModel
 import com.example.promomodule.models.PromotionsModel
@@ -26,14 +27,19 @@ class PromotionsAdapter(var context:Context? = null,
     }
 
     override fun onBindViewHolder(holder: ViewHolderRecycler, position: Int) {
-        holder.imagePromotion.setImageResource(promotionsModel!![position].picturePromotion)
-        holder.textPromotion.text = promotionsModel!![position].textPromotion
+        Glide.with(View(context))
+            .load(promotionsModel!![position].picturePromotion)
+            .centerCrop()
+            .into(holder.imagePromotion)
+        holder.textPromotion.text = promotionsModel!![position].textDescriptionPromotion
+        holder.textCompanyName.text = promotionsModel!![position].textNameCompany
 
     }
 
 
-    inner class ViewHolderRecycler(var item:View): RecyclerView.ViewHolder(item){
+    inner class ViewHolderRecycler( item:View): RecyclerView.ViewHolder(item){
         var imagePromotion:ImageView = item.findViewById(R.id.image_promotion)
         var textPromotion:TextView = item.findViewById(R.id.text_promotion)
+        var textCompanyName:TextView = item.findViewById(R.id.text_company_name)
     }
 }

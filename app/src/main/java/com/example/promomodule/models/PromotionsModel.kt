@@ -1,3 +1,5 @@
 package com.example.promomodule.models
 
-data class PromotionsModel(var picturePromotion: Int, var textPromotion: String)
+import com.bumptech.glide.load.model.stream.UrlLoader
+
+data class PromotionsModel(var picturePromotion:String, var textDescriptionPromotion: String, var textNameCompany:String)

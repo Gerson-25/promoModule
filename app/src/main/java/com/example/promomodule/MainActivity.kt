@@ -26,15 +26,15 @@ class MainActivity : AppCompatActivity() {
 
         categoriesModel = listOf(
             CategoriesModel(R.drawable.ic_mortarboard, "Educación"),
-            CategoriesModel(R.drawable.ic_pizza, "Restaurante"),
+            CategoriesModel(R.drawable.ic_pizza, "Comida"),
             CategoriesModel(R.drawable.ic_shopping_cart, "Mercado"),
             CategoriesModel(R.drawable.ic_stethoscope, "Salud"),
             CategoriesModel(R.drawable.ic_ticket, "Cine")
         )
         promotionsModel = listOf(
-            PromotionsModel(R.drawable.ic_mortarboard, (R.string.text_lorem_ipsum).toString()),
-            PromotionsModel(R.drawable.ic_pizza, (R.string.text_lorem_ipsum).toString()),
-            PromotionsModel(R.drawable.ic_pizza, (R.string.text_lorem_ipsum).toString())
+            PromotionsModel("https://www.america-retail.com/static//2018/10/Pizza-Hut.jpg", resources.getString(R.string.text_lorem_ipsum),"Pizza Hut"),
+            PromotionsModel("https://fastly.4sqi.net/img/general/699x268/54779162_VogiIWp98J66Fa3ngwwuMkIRa3b-LRGWrRYa6x0fby4.jpg", resources.getString(R.string.text_lorem_ipsum), "Almacenes Siman"),
+            PromotionsModel("https://www.mercadofitness.com/wp-content/uploads/2014/07/Be-Fit-inaugur%C3%B3-su-tercer-gimnasio-en-El-Salvador-.jpg", resources.getString(R.string.text_lorem_ipsum), "Be Fit")
         )
 
         /*
