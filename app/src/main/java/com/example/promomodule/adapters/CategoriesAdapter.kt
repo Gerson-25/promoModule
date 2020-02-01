@@ -24,10 +24,8 @@ class CategoriesAdapter(var context:Context? = null,
     }
 
     override fun onBindViewHolder(holder: ViewHolderRecycler, position: Int) {
-
         holder.imageMovieCategory.setImageResource(categoriesModel!![position].pictureCategory)
         holder.titleMovieCategory.text =categoriesModel!![position].nameCategory
-
     }
 
 
