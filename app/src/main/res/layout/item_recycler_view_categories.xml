@@ -7,7 +7,7 @@
     android:layout_height="100dp">
 
     <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="#FFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -36,7 +36,7 @@
                 android:fontFamily="@font/doppio_one"
                 android:text="Peliculas de Miedo"
                 android:textAlignment="center"
-                android:textColor="#FFF" />
+                android:textColor="@color/color_text" />
 
 
         </LinearLayout>

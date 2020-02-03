@@ -19,18 +19,20 @@ import com.example.promomodule.adapters.PromotionsAdapter
 import com.example.promomodule.databinding.FragmentPromoHomeBinding
 import com.example.promomodule.models.CategoriesModel
 import com.example.promomodule.models.PromotionsModel
+import com.google.firebase.database.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener {
 
-    private var binding : FragmentPromoHomeBinding? = null
+    private var binding: FragmentPromoHomeBinding? = null
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
     private var categoriesModel:List<CategoriesModel>? = null
     private var promotionsModel:List<PromotionsModel>? = null
+    var categoryRef: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,21 +44,22 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_promo_home,container,false)
-        return binding!!.root
+        savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_promo_home, container, false)
+        return binding!!.linearLayout.rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         categoriesModel = listOf(
-            CategoriesModel(R.drawable.ic_mortarboard, "Educación"),
-            CategoriesModel(R.drawable.ic_pizza, "Comida"),
-            CategoriesModel(R.drawable.ic_shopping_cart, "Mercado"),
-            CategoriesModel(R.drawable.ic_stethoscope, "Salud"),
-            CategoriesModel(R.drawable.ic_ticket, "Cine")
+            CategoriesModel(R.drawable.icon_food, "Comida"),
+            CategoriesModel(R.drawable.icon_sport, "Deportes"),
+            CategoriesModel(R.drawable.icon_entertainment, "Entreten..."),
+            CategoriesModel(R.drawable.icon_pets, "Mascotas"),
+            CategoriesModel(R.drawable.icon_medicine, "Medicina"),
+            CategoriesModel(R.drawable.icon_groceries, "Mercado"),
+            CategoriesModel(R.drawable.icon_goodwill, "Personal")
         )
 
         promotionsModel = listOf(
@@ -118,7 +121,7 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
         var navController:NavController
         navController = findNavController()
         var action = PromoHomeFragmentDirections.actionPromoHomeFragmentToCategoriesFragment(categoryName, icon)
-
         navController!!.navigate(action)
+
     }
 }

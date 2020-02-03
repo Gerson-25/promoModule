@@ -1,46 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp">
 
     <androidx.cardview.widget.CardView
+        android:elevation="8dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false"
+        android:backgroundTint="#FFFF"
+        android:outlineAmbientShadowColor="@color/colorPrimary"
+        android:outlineSpotShadowColor="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="210dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:padding="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:textSize="20dp"
+                android:textColor="@color/color_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:fontFamily="@font/doppio_one"
+                android:text="2x7.50 pizzas de 1 ingrediente" />
+
             <ImageView
                 android:src="@drawable/ic_005_dracula"
                 android:id="@+id/image_promotion"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="150dp" />
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_weight="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/ic_company"/>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/text_company_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/doppio_one"
+                        android:padding="5dp"
+                        android:text="NINE HUNDRED PIZZA"
+                        android:textColor="@color/color_text"/>
+
+                    <TextView
+                        android:id="@+id/text_date_promotion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/doppio_one"
+                        android:padding="5dp"
+                        android:text="20/03/2020"
+                        android:textColor="@color/color_text"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/text_company_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/doppio_one"
-                android:paddingLeft="15dp"
-                android:paddingTop="15dp"
-                android:text="Pizza Hut"
-                android:textColor="@color/colorSecundary" />
 
-            <TextView
                 android:id="@+id/text_promotion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="15dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
                 android:fontFamily="@font/doppio_one"
-                android:text="@string/text_lorem_ipsum"
-                android:textColor="#FFF" />
+                android:text="@string/text_lorem_ipsum" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

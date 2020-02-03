@@ -2,35 +2,173 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".CategoriesFragment">
 
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_margin="15dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/icon_category"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:id="@+id/icon_category"
+                android:padding="5dp"
+                android:background="@drawable/icon_container"
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_shopping_cart"/>
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/text_name_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/doppio_one"
+                android:text="@string/start_text" />
+        </LinearLayout>
+
+        <LinearLayout
             android:padding="5dp"
+            android:outlineSpotShadowColor="@color/color_text"
             android:background="@drawable/icon_container"
-            android:layout_weight="4"
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_shopping_cart"/>
+            android:layout_height="80dp">
 
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            android:id="@+id/text_name_category"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:civ_border_color="@color/color_text"
+                app:civ_border_width="5dp"
+                android:src="@mipmap/ic_company"/>
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/text_name_category2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/doppio_one"
+                android:text="@string/start_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/doppio_one"
-            android:text="@string/start_text" />
+            android:layout_height="45dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:civ_border_color="@color/color_text"
+                app:civ_border_width="5dp"
+                android:src="@mipmap/ic_company"/>
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/text_name_category1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/doppio_one"
+                android:text="@string/start_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:civ_border_color="@color/color_text"
+                app:civ_border_width="5dp"
+                android:src="@mipmap/ic_company"/>
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/text_name_category3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/doppio_one"
+                android:text="@string/start_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:civ_border_color="@color/color_text"
+                app:civ_border_width="5dp"
+                android:src="@mipmap/ic_company"/>
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/text_name_category4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/doppio_one"
+                android:text="@string/start_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:civ_border_color="@color/color_text"
+                app:civ_border_width="5dp"
+                android:src="@mipmap/ic_company"/>
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/text_name_category5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/doppio_one"
+                android:text="@string/start_text" />
+        </LinearLayout>
+
     </LinearLayout>
+
 
 </FrameLayout>

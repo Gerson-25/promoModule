@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
+import com.example.promomodule.models.CompaniesModel
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 
 
@@ -20,6 +20,7 @@ class CategoriesFragment : Fragment() {
     private var param1: String? = null
     private var param2: Int? = null
     private var listener: OnFragmentInteractionListener? = null
+    private var companiesMdel:List<CompaniesModel>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +59,25 @@ class CategoriesFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    fun setData(){
+        companiesMdel= listOf(
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
+            CompaniesModel("Comida", "piza hut", R.drawable.icon_food)
+        )
     }
 
     interface OnFragmentInteractionListener {
