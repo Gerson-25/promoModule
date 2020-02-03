@@ -61,22 +61,15 @@ class MainActivity : AppCompatActivity() {
         })*/
         //SETTING PROMOTION_RECYCLERVIEW
         promotionsRecycler = findViewById(R.id.promotions_recycler_view)
-
         var setPromotionAdapter = PromotionsAdapter(this, promotionsModel)
-
         promotionsRecycler!!.adapter = setPromotionAdapter
-
         promotionsRecycler!!.layoutManager = LinearLayoutManager(this)
 
 
         //SETTING CATEGORIES_RECYCLERVIEW
         categoriesRecycler = findViewById(R.id.categories_recycler_view)
-
         var setCategoryAdapter = CategoriesAdapter(this, categoriesModel)
-
         categoriesRecycler!!.adapter = setCategoryAdapter
-
         categoriesRecycler!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
     }
 }

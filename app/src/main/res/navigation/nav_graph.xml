@@ -11,7 +11,11 @@
         android:label="PromoHomeFragment" >
         <action
             android:id="@+id/action_promoHomeFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
+            app:destination="@id/categoriesFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
@@ -19,9 +23,10 @@
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" >
         <argument
-            android:name="category"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="NO CATEGORY SELETED YET" />
+            android:name="nameCategory"
+            app:argType="string" />
+        <argument
+            android:name="icon"
+            app:argType="integer" />
     </fragment>
 </navigation>

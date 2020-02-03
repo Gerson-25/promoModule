@@ -3,12 +3,16 @@ package com.example.promomodule
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.promomodule.adapters.CategoriesAdapter
 import com.example.promomodule.adapters.PromotionsAdapter
@@ -19,7 +23,7 @@ import com.example.promomodule.models.PromotionsModel
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class PromoHomeFragment : Fragment() {
+class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener {
 
     private var binding : FragmentPromoHomeBinding? = null
     private var param1: String? = null
@@ -27,6 +31,7 @@ class PromoHomeFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private var categoriesModel:List<CategoriesModel>? = null
     private var promotionsModel:List<PromotionsModel>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -61,19 +66,15 @@ class PromoHomeFragment : Fragment() {
         )
 
         binding!!.categoriesRecyclerView
-        var setCategoryAdapter = CategoriesAdapter(context, categoriesModel)
+        var setCategoryAdapter = CategoriesAdapter(context, categoriesModel, this)
         binding!!.categoriesRecyclerView.adapter = setCategoryAdapter
         binding!!.categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding!!.sendButton.setOnClickListener {
-            var category = "Comida"
-            listener!!.onFragmentInteraction(category)
-        }
+
 
         var setPromotionAdapter = PromotionsAdapter(context, promotionsModel)
-
         binding!!.promotionsRecyclerView.adapter = setPromotionAdapter
-
         binding!!.promotionsRecyclerView.layoutManager = LinearLayoutManager(context)
+
 
 
     }
@@ -110,5 +111,14 @@ class PromoHomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onCategoryClick(categoryName: String, icon:Int) {
+        Toast.makeText(context,"click $categoryName", Toast.LENGTH_SHORT).show()
+        var navController:NavController
+        navController = findNavController()
+        var action = PromoHomeFragmentDirections.actionPromoHomeFragmentToCategoriesFragment(categoryName, icon)
+
+        navController!!.navigate(action)
     }
 }

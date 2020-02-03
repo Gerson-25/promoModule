@@ -37,9 +37,10 @@ class PromotionsAdapter(var context:Context? = null,
     }
 
 
-    inner class ViewHolderRecycler( item:View): RecyclerView.ViewHolder(item){
-        var imagePromotion:ImageView = item.findViewById(R.id.image_promotion)
-        var textPromotion:TextView = item.findViewById(R.id.text_promotion)
-        var textCompanyName:TextView = item.findViewById(R.id.text_company_name)
+    inner class ViewHolderRecycler( item:View): RecyclerView.ViewHolder(item) {
+        var imagePromotion: ImageView = item.findViewById(R.id.image_promotion)
+        var textPromotion: TextView = item.findViewById(R.id.text_promotion)
+        var textCompanyName: TextView = item.findViewById(R.id.text_company_name)
+
     }
 }
