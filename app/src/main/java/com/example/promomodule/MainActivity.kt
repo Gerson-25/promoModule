@@ -67,9 +67,9 @@ class MainActivity : AppCompatActivity() {
 
 
         //SETTING CATEGORIES_RECYCLERVIEW
-        categoriesRecycler = findViewById(R.id.categories_recycler_view)
-        var setCategoryAdapter = CategoriesAdapter(this, categoriesModel)
+        /*categoriesRecycler = findViewById(R.id.categories_recycler_view)
+        var setCategoryAdapter = CategoriesAdapter(this,  ,categoriesModel)
         categoriesRecycler!!.adapter = setCategoryAdapter
-        categoriesRecycler!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        categoriesRecycler!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)*/
     }
 }

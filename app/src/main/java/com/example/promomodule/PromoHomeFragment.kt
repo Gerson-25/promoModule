@@ -2,6 +2,7 @@ package com.example.promomodule
 
 import android.content.Context
 import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +20,11 @@ import com.example.promomodule.adapters.CategoriesAdapter
 import com.example.promomodule.adapters.PromotionsAdapter
 import com.example.promomodule.databinding.FragmentPromoHomeBinding
 import com.example.promomodule.models.CategoriesModel
+import com.example.promomodule.models.CategoryList
 import com.example.promomodule.models.PromotionsModel
+import com.example.promomodule.viewModel.AllianceViewModel
 import com.google.firebase.database.*
+import com.google.gson.Gson
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -32,7 +37,11 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
     private var listener: OnFragmentInteractionListener? = null
     private var categoriesModel:List<CategoriesModel>? = null
     private var promotionsModel:List<PromotionsModel>? = null
-    var categoryRef: DatabaseReference? = null
+    private var categoryList:CategoryList? = null
+    var allianceData:String? = null
+    var categoryRef = FirebaseDatabase.getInstance().reference
+
+    private val viewModel by lazy { ViewModelProviders.of(this).get(AllianceViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +55,32 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_promo_home, container, false)
+        binding!!.lifecycleOwner
+        viewModel.getCategories()
+        val data=viewModel.categories.value.toString()
+        Toast.makeText(context,"value: $data", Toast.LENGTH_SHORT).show()
         return binding!!.linearLayout.rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+
+        categoryRef.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                /*p0.children.forEach{
+                    var gson = Gson()
+                    categoryList = gson.fromJson(it.value.toString(),CategoryList::class.java)
+                }*/
+            }
+        })
 
         categoriesModel = listOf(
             CategoriesModel(R.drawable.icon_food, "Comida"),
