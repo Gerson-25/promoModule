@@ -16,19 +16,19 @@ class AllianceViewModel: ViewModel() {
 
     private var firestoredb = FirebaseDatabase.getInstance().getReference("alliance")
 
-
     private var _categories = MutableLiveData<MutableList<Category>>()
+    private var _establishments = MutableLiveData<MutableList<Establishment>>()
 
     val categories: LiveData<MutableList<Category>>
         get() = _categories
+    val establishment:LiveData<MutableList<Establishment>>
+        get() = _establishments
 
     fun getCategories() {
 
         val allCategory = mutableListOf<Category>()
 
-
         firestoredb.addValueEventListener( object : ValueEventListener {
-
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {

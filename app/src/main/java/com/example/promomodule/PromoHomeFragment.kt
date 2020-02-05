@@ -21,10 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.promomodule.adapters.CategoriesAdapter
 import com.example.promomodule.adapters.PromotionsAdapter
 import com.example.promomodule.databinding.FragmentPromoHomeBinding
-import com.example.promomodule.models.CategoriesModel
-import com.example.promomodule.models.Category
-import com.example.promomodule.models.CategoryList
-import com.example.promomodule.models.PromotionsModel
+import com.example.promomodule.models.*
 import com.example.promomodule.viewModel.AllianceViewModel
 import com.google.firebase.database.*
 import com.google.gson.Gson
@@ -38,10 +35,10 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    private var categoriesModel:List<CategoriesModel>? = null
+    private var iconsList:List<CategoriesModel>? = null
     private var promotionsModel:List<PromotionsModel>? = null
     private var categoryList:MutableList<Category>? = null
-    var allianceData:String? = null
+    var alliancecategories:List<Categories>? = null
     var categoryRef = FirebaseDatabase.getInstance().reference
     private val viewModel by lazy { ViewModelProviders.of(this).get(AllianceViewModel::class.java) }
 
@@ -57,21 +54,50 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_promo_home, container, false)
-        binding!!.lifecycleOwner
-        viewModel.getCategories()
-        val data=viewModel.categories.value.toString()
-        viewModel.categories.observe(this, Observer {
-            categoryList = it
-        })
-        Toast.makeText(context,"value: $data", Toast.LENGTH_SHORT).show()
         return binding!!.linearLayout.rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding!!.lifecycleOwner
+        viewModel.getCategories()
+        val data=viewModel.categories.value.toString()
+        viewModel.categories.observe(viewLifecycleOwner, Observer {
+            categoryList = it
+            Toast.makeText(context,"value: ${it.size}", Toast.LENGTH_SHORT).show()
 
+            alliancecategories = listOf(
+                Categories("food"),
+                Categories("food"),
+                Categories("food"),
+                Categories("food"),
+                Categories("food"),
+                Categories("food")
+            )
+            iconsList = listOf(
+                CategoriesModel(R.drawable.icon_food),
+                CategoriesModel(R.drawable.icon_sport),
+                CategoriesModel(R.drawable.icon_entertainment),
+                CategoriesModel(R.drawable.icon_pets),
+                CategoriesModel(R.drawable.icon_medicine),
+                CategoriesModel(R.drawable.icon_groceries)
+            )
 
+            binding!!.categoriesRecyclerView
+            var setCategoryAdapter = CategoriesAdapter(context, iconsList, it, this)
+            binding!!.categoriesRecyclerView.adapter = setCategoryAdapter
+            binding!!.categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        })
+
+        /*if(categoryList==null)
+        {
+            Toast.makeText(context,"value: null", Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            Toast.makeText(context,"value: ${categoryList!!.size.toString()}", Toast.LENGTH_SHORT).show()
+        }*/
 
         categoryRef.addValueEventListener(object :ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -86,27 +112,29 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
                 }*/
             }
         })
-
-        categoriesModel = listOf(
-            CategoriesModel(R.drawable.icon_food, "Comida"),
-            CategoriesModel(R.drawable.icon_sport, "Deportes"),
-            CategoriesModel(R.drawable.icon_entertainment, "Entreten..."),
-            CategoriesModel(R.drawable.icon_pets, "Mascotas"),
-            CategoriesModel(R.drawable.icon_medicine, "Medicina"),
-            CategoriesModel(R.drawable.icon_groceries, "Mercado"),
-            CategoriesModel(R.drawable.icon_goodwill, "Personal")
+        alliancecategories = listOf(
+            Categories("food"),
+            Categories("food"),
+            Categories("food"),
+            Categories("food"),
+            Categories("food"),
+            Categories("food")
         )
-
+        iconsList = listOf(
+            CategoriesModel(R.drawable.icon_food),
+            CategoriesModel(R.drawable.icon_sport),
+            CategoriesModel(R.drawable.icon_entertainment),
+            CategoriesModel(R.drawable.icon_pets),
+            CategoriesModel(R.drawable.icon_medicine),
+            CategoriesModel(R.drawable.icon_groceries)
+        )
         promotionsModel = listOf(
             PromotionsModel("https://www.america-retail.com/static//2018/10/Pizza-Hut.jpg", resources.getString(R.string.text_lorem_ipsum),"Pizza Hut"),
             PromotionsModel("https://fastly.4sqi.net/img/general/699x268/54779162_VogiIWp98J66Fa3ngwwuMkIRa3b-LRGWrRYa6x0fby4.jpg", resources.getString(R.string.text_lorem_ipsum), "Almacenes Siman"),
             PromotionsModel("https://www.mercadofitness.com/wp-content/uploads/2014/07/Be-Fit-inaugur%C3%B3-su-tercer-gimnasio-en-El-Salvador-.jpg", resources.getString(R.string.text_lorem_ipsum), "Be Fit")
         )
 
-        binding!!.categoriesRecyclerView
-        var setCategoryAdapter = CategoriesAdapter(context, categoriesModel, this)
-        binding!!.categoriesRecyclerView.adapter = setCategoryAdapter
-        binding!!.categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
 
 
         var setPromotionAdapter = PromotionsAdapter(context, promotionsModel)
@@ -152,7 +180,7 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
     }
 
     override fun onCategoryClick(categoryName: String, icon:Int) {
-        Toast.makeText(context,"click $categoryName", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context,"click $categoryName", Toast.LENGTH_SHORT).show()
         var navController:NavController
         navController = findNavController()
         var action = PromoHomeFragmentDirections.actionPromoHomeFragmentToCategoriesFragment(categoryName, icon)

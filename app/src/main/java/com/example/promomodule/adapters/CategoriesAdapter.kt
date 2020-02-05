@@ -12,12 +12,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promomodule.R
+import com.example.promomodule.models.Categories
 import com.example.promomodule.models.CategoriesModel
 import com.example.promomodule.models.Category
-import com.example.promomodule.models.CategoryList
 
 class CategoriesAdapter(var context:Context? = null,
-                        var categoriesModel: List<CategoriesModel>? = null, var onCategoryClickListener: OnCategoryClickListener? = null): RecyclerView.Adapter<CategoriesAdapter.ViewHolderRecycler>() {
+                        var iconsList: List<CategoriesModel>? = null,var categoryList: MutableList<Category>? = null, var onCategoryClickListener: OnCategoryClickListener? = null): RecyclerView.Adapter<CategoriesAdapter.ViewHolderRecycler>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderRecycler {
         val inflater = LayoutInflater.from(context)
             var view = inflater.inflate(R.layout.item_recycler_view_categories, parent, false)
@@ -25,13 +25,13 @@ class CategoriesAdapter(var context:Context? = null,
     }
 
     override fun getItemCount(): Int {
-        return categoriesModel!!.size
+        return iconsList!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolderRecycler, position: Int) {
-        holder.imageMovieCategory.setImageResource(categoriesModel!![position].pictureCategory)
-        holder.titleMovieCategory.text = categoriesModel!![position].nameCategory
-        holder.bindData(categoriesModel!![position].nameCategory, categoriesModel!![position].pictureCategory)
+        holder.imageMovieCategory.setImageResource(iconsList!![position].pictureCategory)
+        holder.titleMovieCategory.text = categoryList!![position].category
+        holder.bindData(categoryList!![position].category!!, iconsList!![position].pictureCategory)
     }
 
 

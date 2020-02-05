@@ -7,7 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.example.promomodule.databinding.FragmentCategoriesBinding
 import com.example.promomodule.models.CompaniesModel
+import com.example.promomodule.viewModel.AllianceViewModel
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 
 
@@ -20,7 +26,8 @@ class CategoriesFragment : Fragment() {
     private var param1: String? = null
     private var param2: Int? = null
     private var listener: OnFragmentInteractionListener? = null
-    private var companiesMdel:List<CompaniesModel>? = null
+    private var binding: FragmentCategoriesBinding? = null
+    private val viewModel by lazy { ViewModelProviders.of(this).get(AllianceViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +42,24 @@ class CategoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_categories, container, false)
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.text_name_category.text = param1
         view.icon_category.setImageResource(param2!!)
+
+        binding!!.lifecycleOwner
+
+        viewModel.getCategories()
+        val data = viewModel.establishment.value.toString()
+        Toast.makeText(context,"value: $data", Toast.LENGTH_SHORT).show()
+        viewModel.establishment.observe(viewLifecycleOwner, Observer {
+
+        })
+
+
     }
 
     fun onButtonPressed(uri: Uri) {
@@ -61,24 +80,6 @@ class CategoriesFragment : Fragment() {
         listener = null
     }
 
-    fun setData(){
-        companiesMdel= listOf(
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food),
-            CompaniesModel("Comida", "piza hut", R.drawable.icon_food)
-        )
-    }
 
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction(uri: Uri)

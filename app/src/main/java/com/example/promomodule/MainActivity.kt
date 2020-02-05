@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
         //viewPager = findViewById(R.id.viewPager)
 
         categoriesModel = listOf(
-            CategoriesModel(R.drawable.ic_mortarboard, "Educación"),
-            CategoriesModel(R.drawable.ic_pizza, "Comida"),
-            CategoriesModel(R.drawable.ic_shopping_cart, "Mercado"),
-            CategoriesModel(R.drawable.ic_stethoscope, "Salud"),
-            CategoriesModel(R.drawable.ic_ticket, "Cine")
+            CategoriesModel(R.drawable.ic_mortarboard),
+            CategoriesModel(R.drawable.ic_pizza),
+            CategoriesModel(R.drawable.ic_shopping_cart),
+            CategoriesModel(R.drawable.ic_stethoscope),
+            CategoriesModel(R.drawable.ic_ticket)
         )
         promotionsModel = listOf(
             PromotionsModel("https://www.america-retail.com/static//2018/10/Pizza-Hut.jpg", resources.getString(R.string.text_lorem_ipsum),"Pizza Hut"),
