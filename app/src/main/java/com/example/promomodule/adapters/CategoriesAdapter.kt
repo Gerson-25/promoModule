@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promomodule.R
 import com.example.promomodule.models.CategoriesModel
+import com.example.promomodule.models.Category
 import com.example.promomodule.models.CategoryList
 
 class CategoriesAdapter(var context:Context? = null,

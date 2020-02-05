@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -20,6 +22,7 @@ import com.example.promomodule.adapters.CategoriesAdapter
 import com.example.promomodule.adapters.PromotionsAdapter
 import com.example.promomodule.databinding.FragmentPromoHomeBinding
 import com.example.promomodule.models.CategoriesModel
+import com.example.promomodule.models.Category
 import com.example.promomodule.models.CategoryList
 import com.example.promomodule.models.PromotionsModel
 import com.example.promomodule.viewModel.AllianceViewModel
@@ -37,10 +40,9 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
     private var listener: OnFragmentInteractionListener? = null
     private var categoriesModel:List<CategoriesModel>? = null
     private var promotionsModel:List<PromotionsModel>? = null
-    private var categoryList:CategoryList? = null
+    private var categoryList:MutableList<Category>? = null
     var allianceData:String? = null
     var categoryRef = FirebaseDatabase.getInstance().reference
-
     private val viewModel by lazy { ViewModelProviders.of(this).get(AllianceViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +60,9 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
         binding!!.lifecycleOwner
         viewModel.getCategories()
         val data=viewModel.categories.value.toString()
+        viewModel.categories.observe(this, Observer {
+            categoryList = it
+        })
         Toast.makeText(context,"value: $data", Toast.LENGTH_SHORT).show()
         return binding!!.linearLayout.rootView
     }
