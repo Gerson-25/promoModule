@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFF">
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_margin="10dp"
+        android:id="@+id/image_company"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_005_dracula"
+        app:civ_border_width="5dp"
+        app:civ_border_color="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/text_company_name"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="25dp"
+        android:layout_weight="1"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ONE HUNDRED PIZZA"/>
+</LinearLayout>

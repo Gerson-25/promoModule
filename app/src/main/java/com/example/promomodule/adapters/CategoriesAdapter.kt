@@ -31,7 +31,7 @@ class CategoriesAdapter(var context:Context? = null,
     override fun onBindViewHolder(holder: ViewHolderRecycler, position: Int) {
         holder.imageMovieCategory.setImageResource(iconsList!![position].pictureCategory)
         holder.titleMovieCategory.text = categoryList!![position].category
-        holder.bindData(categoryList!![position].category!!, iconsList!![position].pictureCategory)
+        holder.bindData(categoryList!![position].category!!, iconsList!![position].pictureCategory, position)
     }
 
 
@@ -40,10 +40,10 @@ class CategoriesAdapter(var context:Context? = null,
         var titleMovieCategory:TextView = item.findViewById(R.id.text_category)
         var itemContainer:LinearLayout= item.findViewById(R.id.item_view_pager_container)
 
-        fun bindData(nameCategory:String, icon:Int){
+        fun bindData(nameCategory:String, icon:Int, position: Int){
 
             itemContainer.setOnClickListener{
-                onCategoryClickListener!!.onCategoryClick(nameCategory, icon)
+                onCategoryClickListener!!.onCategoryClick(nameCategory, icon, position)
 
             }
         }
@@ -54,7 +54,7 @@ class CategoriesAdapter(var context:Context? = null,
 
     interface OnCategoryClickListener
     {
-        fun onCategoryClick(categoryName: String, icon:Int)
+        fun onCategoryClick(categoryName: String, icon:Int, position: Int)
     }
 
 }

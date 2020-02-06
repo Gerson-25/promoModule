@@ -28,5 +28,8 @@
         <argument
             android:name="icon"
             app:argType="integer" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
 </navigation>

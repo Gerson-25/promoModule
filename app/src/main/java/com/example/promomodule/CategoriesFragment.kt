@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.promomodule.adapters.CategoriesFragmentAdapter
 import com.example.promomodule.databinding.FragmentCategoriesBinding
 import com.example.promomodule.models.CompaniesModel
 import com.example.promomodule.viewModel.AllianceViewModel
@@ -19,12 +22,14 @@ import kotlinx.android.synthetic.main.fragment_categories.view.*
 
 private const val ARG_PARAM1 = "nameCategory"
 private const val ARG_PARAM2 = "icon"
+private const val ARG_PARAM3 = "position"
 
 
 class CategoriesFragment : Fragment() {
 
     private var param1: String? = null
     private var param2: Int? = null
+    private var param3: Int? = null
     private var listener: OnFragmentInteractionListener? = null
     private var binding: FragmentCategoriesBinding? = null
     private val viewModel by lazy { ViewModelProviders.of(this).get(AllianceViewModel::class.java) }
@@ -34,6 +39,7 @@ class CategoriesFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getInt(ARG_PARAM2)
+            param3 = it.getInt(ARG_PARAM3)
         }
     }
 
@@ -50,15 +56,20 @@ class CategoriesFragment : Fragment() {
         view.text_name_category.text = param1
         view.icon_category.setImageResource(param2!!)
 
+        Toast.makeText(context,"value:$param3 ", Toast.LENGTH_SHORT).show()
+
         binding!!.lifecycleOwner
 
         viewModel.getCategories()
-        val data = viewModel.establishment.value.toString()
-        Toast.makeText(context,"value: $data", Toast.LENGTH_SHORT).show()
         viewModel.establishment.observe(viewLifecycleOwner, Observer {
-
         })
+        var categoryListSize = viewModel.categories.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, "value: ${it.size}", Toast.LENGTH_SHORT).show()
 
+            var adapter = CategoriesFragmentAdapter(context, it)
+            binding!!.categoriesRecyclerViewFragment.adapter =adapter
+            binding!!.categoriesRecyclerViewFragment.layoutManager= LinearLayoutManager(context)
+        })
 
     }
 
@@ -86,11 +97,12 @@ class CategoriesFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(param1: String, param2: Int) =
+        fun newInstance(param1: String, param2: Int, param3: Int) =
             CategoriesFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putInt(ARG_PARAM2, param2)
+                    putInt(ARG_PARAM3, param3)
                 }
             }
     }

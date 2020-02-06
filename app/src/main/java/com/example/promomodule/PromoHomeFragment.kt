@@ -25,6 +25,7 @@ import com.example.promomodule.models.*
 import com.example.promomodule.viewModel.AllianceViewModel
 import com.google.firebase.database.*
 import com.google.gson.Gson
+import java.text.FieldPosition
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -63,18 +64,19 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
         binding!!.lifecycleOwner
         viewModel.getCategories()
         val data=viewModel.categories.value.toString()
+        //Toast.makeText(context,"value: $data", Toast.LENGTH_SHORT).show()
         viewModel.categories.observe(viewLifecycleOwner, Observer {
             categoryList = it
             Toast.makeText(context,"value: ${it.size}", Toast.LENGTH_SHORT).show()
 
-            alliancecategories = listOf(
+            /*alliancecategories = listOf(
                 Categories("food"),
                 Categories("food"),
                 Categories("food"),
                 Categories("food"),
                 Categories("food"),
                 Categories("food")
-            )
+            )*/
             iconsList = listOf(
                 CategoriesModel(R.drawable.icon_food),
                 CategoriesModel(R.drawable.icon_sport),
@@ -89,7 +91,9 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
             binding!!.categoriesRecyclerView.adapter = setCategoryAdapter
             binding!!.categoriesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         })
-
+        val data2=viewModel.establishment.value.toString()
+        Toast.makeText(context,"value: $data2", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context,"value: $dataEst", Toast.LENGTH_SHORT).show()
         /*if(categoryList==null)
         {
             Toast.makeText(context,"value: null", Toast.LENGTH_SHORT).show()
@@ -105,7 +109,6 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-
                 /*p0.children.forEach{
                     var gson = Gson()
                     categoryList = gson.fromJson(it.value.toString(),CategoryList::class.java)
@@ -133,9 +136,6 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
             PromotionsModel("https://fastly.4sqi.net/img/general/699x268/54779162_VogiIWp98J66Fa3ngwwuMkIRa3b-LRGWrRYa6x0fby4.jpg", resources.getString(R.string.text_lorem_ipsum), "Almacenes Siman"),
             PromotionsModel("https://www.mercadofitness.com/wp-content/uploads/2014/07/Be-Fit-inaugur%C3%B3-su-tercer-gimnasio-en-El-Salvador-.jpg", resources.getString(R.string.text_lorem_ipsum), "Be Fit")
         )
-
-
-
 
         var setPromotionAdapter = PromotionsAdapter(context, promotionsModel)
         binding!!.promotionsRecyclerView.adapter = setPromotionAdapter
@@ -179,11 +179,11 @@ class PromoHomeFragment : Fragment(), CategoriesAdapter.OnCategoryClickListener 
             }
     }
 
-    override fun onCategoryClick(categoryName: String, icon:Int) {
+    override fun onCategoryClick(categoryName: String, icon:Int, position: Int) {
         //Toast.makeText(context,"click $categoryName", Toast.LENGTH_SHORT).show()
         var navController:NavController
         navController = findNavController()
-        var action = PromoHomeFragmentDirections.actionPromoHomeFragmentToCategoriesFragment(categoryName, icon)
+        var action = PromoHomeFragmentDirections.actionPromoHomeFragmentToCategoriesFragment(categoryName, icon, position)
         navController!!.navigate(action)
 
     }

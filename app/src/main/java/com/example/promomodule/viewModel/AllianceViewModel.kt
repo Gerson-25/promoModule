@@ -27,6 +27,8 @@ class AllianceViewModel: ViewModel() {
     fun getCategories() {
 
         val allCategory = mutableListOf<Category>()
+        val allEstablishment = mutableListOf<Establishment>()
+
 
         firestoredb.addValueEventListener( object : ValueEventListener {
 
@@ -41,8 +43,10 @@ class AllianceViewModel: ViewModel() {
                             if (establishment.key == "establishments") {
 
                                 establishment.children.forEach { establishmentKey ->
-                                    val est = establishmentKey.getValue(Establishment::class.java)
-                                    cate.establishments = est
+
+                                        val est = establishmentKey.getValue(Establishment::class.java) as Establishment
+                                        cate.establishments = est
+
 
                                     establishmentKey.children.forEach { promotions ->
                                         if (promotions.key == "promotions") {
@@ -58,13 +62,8 @@ class AllianceViewModel: ViewModel() {
 
                             }
 
-
                         }
-
-
                         allCategory.add(cate)
-
-
                     }
 
 
@@ -83,4 +82,5 @@ class AllianceViewModel: ViewModel() {
 
         })
     }
+
 }
