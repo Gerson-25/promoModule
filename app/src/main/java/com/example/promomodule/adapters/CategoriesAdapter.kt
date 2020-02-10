@@ -24,10 +24,16 @@ class CategoriesAdapter(var context:Context? = null,
     }
 
     override fun onBindViewHolder(holder: ViewHolderRecycler, position: Int) {
+<<<<<<< Updated upstream
 
         holder.imageMovieCategory.setImageResource(categoriesModel!![position].pictureCategory)
         holder.titleMovieCategory.text =categoriesModel!![position].nameCategory
 
+=======
+        holder.imageMovieCategory.setImageResource(iconsList!![position].pictureCategory)
+        holder.titleMovieCategory.text = categoryList!![position].category_id
+        holder.bindData(categoryList!![position].category_id!!, iconsList!![position].pictureCategory, position)
+>>>>>>> Stashed changes
     }
 
 

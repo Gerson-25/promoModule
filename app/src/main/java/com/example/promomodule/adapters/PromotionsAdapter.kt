@@ -22,10 +22,11 @@ class PromotionsAdapter(var context:Context? = null,
     }
 
     override fun getItemCount(): Int {
-        return promotionsModel!!.size
+        return promotionsModel!!.size + 20
     }
 
     override fun onBindViewHolder(holder: ViewHolderRecycler, position: Int) {
+<<<<<<< Updated upstream
         holder.imagePromotion.setImageResource(promotionsModel!![position].picturePromotion)
         holder.textPromotion.text = promotionsModel!![position].textPromotion
 
@@ -35,5 +36,30 @@ class PromotionsAdapter(var context:Context? = null,
     inner class ViewHolderRecycler(var item:View): RecyclerView.ViewHolder(item){
         var imagePromotion:ImageView = item.findViewById(R.id.image_promotion)
         var textPromotion:TextView = item.findViewById(R.id.text_promotion)
+=======
+        if (promotionsModel!!.size > 2){
+            Glide.with(View(context))
+                .load(promotionsModel!![1].picturePromotion)
+                .centerCrop()
+                .into(holder.imagePromotion)
+            holder.textPromotion.text = promotionsModel!![1].textDescriptionPromotion
+            holder.textCompanyName.text = promotionsModel!![1].textNameCompany
+        }
+        else{
+            Glide.with(View(context))
+                .load(promotionsModel!![position].picturePromotion)
+                .centerCrop()
+                .into(holder.imagePromotion)
+            holder.textPromotion.text = promotionsModel!![position].textDescriptionPromotion
+            holder.textCompanyName.text = promotionsModel!![position].textNameCompany
+        }
+
+    }
+
+    inner class ViewHolderRecycler( item:View): RecyclerView.ViewHolder(item) {
+        var imagePromotion: ImageView = item.findViewById(R.id.image_promotion)
+        var textPromotion: TextView = item.findViewById(R.id.text_promotion)
+        var textCompanyName: TextView = item.findViewById(R.id.text_company_name)
+>>>>>>> Stashed changes
     }
 }
